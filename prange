@@ -1,0 +1,10 @@
+#! /usr/bin/env ruby
+
+from = ARGV[0]
+to = ARGV[1]
+if from =~ /^\d+$/
+  from = from.to_i
+  to = to.to_i
+end
+
+print (from..to).to_a
