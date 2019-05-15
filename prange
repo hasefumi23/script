@@ -13,8 +13,16 @@ if from =~ /^\d+$/ && params['n']
   to = to.to_i
 end
 
-if params['p']
-  print "(#{(from..to).to_a.join(', ')})"
+str = if params['p']
+  if !params['n']
+    joined = (from..to).to_a.map { |n| %Q!"#{n}"! }.join(', ')
+    "(#{joined})"
+  else
+    joined = (from..to).to_a.join(', ')
+    "(#{joined})"
+  end
 else
-  print (from..to).to_a
+  (from..to).to_a
 end
+
+print str
