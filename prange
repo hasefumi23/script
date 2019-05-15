@@ -1,10 +1,20 @@
 #! /usr/bin/env ruby
 
+require 'optparse'
+# n - 数字表現
+# s - 文字列表現(デフォルト)
+# p - ()で囲う
+params = ARGV.getopts('nsp')
+
 from = ARGV[0]
 to = ARGV[1]
-if from =~ /^\d+$/
+if from =~ /^\d+$/ && params['n']
   from = from.to_i
   to = to.to_i
 end
 
-print (from..to).to_a
+if params['p']
+  print "(#{(from..to).to_a.join(', ')})"
+else
+  print (from..to).to_a
+end
