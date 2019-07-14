@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ -z $NOTES_PATH ]; then
+  echo "Please set 'NOTES_PATH' env."
+fi
+
+if [ $# -gt 1 ]; then
+  echo "Pass only 0 or 1 argyment."
+  echo "Do nothing."
+  exit 0
+fi
+
+if [ $# = 0  ]; then
+  title="New_Note"
+elif [ $# = 1  ]; then
+  title=$1
+fi
+
+PREFIX=$(date +%F-%H_%M)
+note_name=${PREFIX}_${title}.md
+note_full_path=$NOTES_PATH/$note_name
+touch $note_full_path
+
+{
+  echo "---"
+  echo "tags:"
+  echo "  -"
+  echo "---"
+  echo
+} >> $note_full_path
+
+echo "Create new note:"
+echo $note_full_path
+
